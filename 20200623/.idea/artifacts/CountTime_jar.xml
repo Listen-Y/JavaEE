@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CountTime:jar">
+    <output-path>D:/JavaJAR包</output-path>
+    <root id="archive" name="20200623.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="D:/JavaJAR包/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="20200623" />
+    </root>
+  </artifact>
+</component>
