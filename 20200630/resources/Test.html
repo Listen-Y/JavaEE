@@ -1,0 +1,32 @@
+<!doctype htpl>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>用户登录</title>
+</head>
+
+<body>
+<table border="1px" cellpadding="10px" cellspacing="0px"
+       style="width: 30%;margin:auto;background:rgb(195,195,195)"
+       bordercolor="red" >
+    <caption>请登录</caption>
+    <form action="/login" method="POST">
+
+        <tr>
+            <th>用户名:</th>
+            <td><input type="text" name="username">
+        </tr>
+        <tr>
+            <th>密码:</th>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="提交">    
+                <input type="reset" value="重置">
+            </th>
+        </tr>
+    </form>
+</table>
+</body>
+</html>
