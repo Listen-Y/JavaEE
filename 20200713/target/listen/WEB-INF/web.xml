@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"
+         metadata-complete="true">
+
+  <servlet>
+    <servlet-name>HttpServletTest1</servlet-name>
+    <servlet-class>HttpServletTest1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest1</servlet-name>
+    <url-pattern>/test1</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest2</servlet-name>
+    <servlet-class>HttpServletTest2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest2</servlet-name>
+    <url-pattern>/test2</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletCal</servlet-name>
+    <servlet-class>HttpServletCal</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletCal</servlet-name>
+    <url-pattern>/cal</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest3</servlet-name>
+    <servlet-class>HttpServletTest3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest3</servlet-name>
+    <url-pattern>/test3</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest4</servlet-name>
+    <servlet-class>HttpServletTest4</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest4</servlet-name>
+    <url-pattern>/test4</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest5</servlet-name>
+    <servlet-class>HttpServletTest5</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest5</servlet-name>
+    <url-pattern>/test5</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest6</servlet-name>
+    <servlet-class>HttpServletTest6</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest6</servlet-name>
+    <url-pattern>/test6</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest7</servlet-name>
+    <servlet-class>HttpServletTest7</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest7</servlet-name>
+    <url-pattern>/test7</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest8</servlet-name>
+    <servlet-class>HttpServletTest8</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest8</servlet-name>
+    <url-pattern>/test8</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest9</servlet-name>
+    <servlet-class>HttpServletTest9</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest9</servlet-name>
+    <url-pattern>/test9</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest10</servlet-name>
+    <servlet-class>HttpServletTest10</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest10</servlet-name>
+    <url-pattern>/test10</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HttpServletTest11</servlet-name>
+    <servlet-class>HttpServletTest11</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletTest11</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+
+
+</web-app>
