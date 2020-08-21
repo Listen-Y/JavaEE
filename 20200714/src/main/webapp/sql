@@ -1,0 +1,13 @@
+create table user (
+id int primary key auto_increment,
+name varchar(20) unique,
+password varchar(20) not null
+);
+
+create table article (
+id int primary key auto_increment,
+title varchar(500) not null,
+data text not null,
+userId int,
+foreign key (userId) references user(id)
+);

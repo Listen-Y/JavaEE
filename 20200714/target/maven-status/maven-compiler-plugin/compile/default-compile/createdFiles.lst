@@ -1,0 +1,6 @@
+service\ArticleServlet.class
+service\DeleteArticleServlet.class
+DynamicPage\DynamicHtmlServlet.class
+service\AddArticle.class
+service\RegisterServlet.class
+service\JoinServlet.class
