@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>转盘抽奖游戏</title>
+
+    <style type="text/css">
+	.kind{
+		background: url(images/bg.jpg);
+		height: 684px;
+		width: 684px;
+		margin: auto;
+
+	}
+	.begin{
+		cursor: pointer;
+	}
+	.allneed{
+		background: url(images/bb.jpg);
+	}
+	</style>
+
+</head>
+<body class="allneed">
+
+<div class="kind">
+    <!-- 以表格的形式添加奖项图片 -->
+    <table style="margin-left: 47px; padding-top: 35px">
+        <tr>
+            <td id="count0"><img src="images/3.png"></td>
+            <td id="count1"><img src="images/2.png"></td>
+            <td id="count2"><img src="images/3.png"></td>
+            <td id="count3"><img src="images/4.png"></td>
+        </tr>
+
+        <tr>
+            <td id="count4"><img src="images/8.png"></td>
+
+            <!-- onclick是一个监听器 只要得到动作 就执行JavaScript的方法 -->
+            <td colspan="2" rowspan="2" class="begin" onclick="changeColor()"></td>
+            <td id="count5"><img src="images/3.png"></td>
+        </tr>
+
+        <tr>
+            <td id="count6"><img src="images/3.png"></td>
+            <td id="count7"><img src="images/7.png"></td>
+        </tr>
+
+        <tr>
+            <td id="count8"><img src="images/5.png"></td>
+            <td id="count9"><img src="images/3.png"></td>
+            <td id="count10"><img src="images/1.png"></td>
+            <td id="count11"><img src="images/6.png"></td>
+        </tr>
+    </table>
+
+</div>
+
+<script type="text/javascript">
+
+var count = 0;
+var allTimes = 0;
+var prize = 0;
+var timer;
+function changeColor(argument) {
+	// body...
+	document.getElementById("count" + count).style.background = "none";
+	//每次都让count++ 让下一个变红 并且判断如果大于12就让其变为0
+	count++;
+	if (count == 12) {
+		count = 0;
+	}
+	document.getElementById("count" + count).style.background = "red";
+
+	//循环的次数
+	if (allTimes < 36 + prize) {
+		allTimes++;
+		//prize决定了到底哪个奖项最终获奖
+		if (allTimes == 36) {
+			prize = Math.floor(Math.random() * 12);
+		}
+		timer = setTimeout(changeColor, 80 + (allTimes * 10));
+	} else {
+		//结束循环 但是不要忘了让allTimes和ount置为0 保证下次抽奖正常可以进入循环
+		clearTimeout(timer);
+		allTimes = 0;
+		//提示中奖结果
+		if(prize == 1 || prize == 3 ||prize == 4 || prize == 7 || prize == 8 || prize == 10 || prize == 11) {
+		  alert("恭喜你中奖了");
+		} else {
+			alert("很遗憾你未中奖");
+		}
+		document.getElementById("count" + count).style.background = "none";
+		count = 0;
+	}
+
+}
+</script>
+
+</body>
+</html>

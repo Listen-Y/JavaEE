@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>第一个页面</title>
+
+    <style type="text/css">
+      .test{
+      	color: green;
+      	font-size: 25px;
+      	background: yellow;
+      }
+      .test2{
+      	color: green;
+      }
+      p {
+      	color: blue;
+      	background: red;
+      }
+      #idChance {
+      	color: orange;
+      	font-size: 18px;
+      }
+      #idChance span {
+      	font-size: 28px;
+      	background: blue;
+
+      }
+	</style>
+</head>
+<body>
+<h1 style="color: red; font-size: 30px; background: blue">标题一</h1>
+<h2 style="color: red; font-size: 25px; background: blue">标题二</h2>
+<p style="color: red; font-size: 15px; background: blue">段落内容</p>
+<p class="test">段落内容</p>
+<p class="test" id="countDwon" onclick="count()">段落内容3</p>
+<p>段落内容</p>
+<p>段落内容</p>
+<span class="test2">文本标签1也叫做文本行标签</span>
+<span class="test2" id="content">文本标签2也叫做文本行标签</span>
+<span class="test2" id="content2" onclick="clickme()">文本标签3也叫做文本行标签</span>
+
+<div id="idChance">
+    <span>块标签</span>
+    <span>块标签</span>
+</div>
+
+<div>
+    <span>块标签</span>
+</div>
+
+<img src="images\1.png">
+<img src="D:\books\images\1.png">
+
+<table border="1">
+    <tr>
+        <td>我是列</td>
+        <td colspan="2">我跨越俩列</td>
+        <td>我是列</td>
+    </tr>
+    <tr>
+        <td>我是列</td>
+        <td rowspan="2">我跨越俩行</td>
+        <td>我是列</td>
+    </tr>
+    <tr>
+        <td>我是列</td>
+        <td>我是列</td>
+        <td>我是列</td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+  document.getElementById("content").innerHTML = "javascript";
+  document.getElementById("content").style.background = "red";
+
+  function clickme(argument) {
+  	// body...
+  	   document.getElementById("content2").innerHTML = "javascript";
+       document.getElementById("content2").style.background = "red";
+  }
+
+  	var times = 3;
+	var timer;
+function count() {
+	// body...
+
+	document.getElementById("countDwon").innerHTML = times;
+	times--;
+	if (times >= 0) {
+	  timer = setTimeout(count, 1000);
+	} else {
+		clearTimeout(timer);
+	}
+
+}
+
+</script>
+
+</body>
+</html>
