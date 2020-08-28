@@ -1,0 +1,34 @@
+create database java_8_8;
+use java_8_8;
+
+drop table if exists user;
+create table user (
+userId int primary key auto_increment,
+name varchar(20) unique,
+password varchar(20) not null,
+isAdmin int not null
+);
+
+drop table if exists dish;
+create table dish (
+dishId int primary key auto_increment,
+name varchar(50) not null,
+price int not null
+);
+
+drop table if exists order_user;
+create table order_user (
+orderId int primary key auto_increment,
+userId int not null,
+time datetime,
+isDone int not null,
+foreign key(userId) references user(userId)
+);
+
+drop table if exists order_dish;
+create table order_dish(
+orderId int,
+dishId int,
+foreign key(orderId) references order_user(orderId),
+foreign key(dishId) references dish(dishId)
+);
