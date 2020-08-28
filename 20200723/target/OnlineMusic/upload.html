@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <style>
+		  #body{
+			  background-image: url("images/w.jpg");
+              background-size:100% 100%;
+              background-attachment: fixed;
+      }
+      </style>
+</head>
+<body id="body">
+<form method="POST" enctype="multipart/form-data" action="/OnlineMusic/uploadServlet">
+    <table style="margin-top:100px; margin-left:100px;">
+        <tr>
+            <td style="font-family: Tahoma, Geneva, sans-serif;
+color: #F5F5F5;
+font-size: 30px;
+font-weight: bold;
+">MP3文件上传:</td>
+            <td><input class="btn btn btn-primary" type="file" name="filename"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="btn btn btn-primary" type="submit" value="上传"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

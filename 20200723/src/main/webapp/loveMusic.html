@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <!-- 使用Edge最新的浏览器的渲染方式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+    width: 默认宽度与设备的宽度相同
+    initial-scale: 初始的缩放比，为1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>OnlineMusic播放器实现</title>
+
+    <link rel="shortcut icon" href="#" />
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <style>
+		  #body{
+			  background-image: url("images/w.jpg");
+              background-size:100% 100%;
+              background-attachment: fixed;
+      }
+      </style>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <!-- <script src="js/bootstrap.min.js"></script>-->
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(function () {
+            load();
+        });
+        function load(loveMusicName){
+            $.ajax({
+                url: "/OnlineMusic/findLoveMusic",
+                type:"get",
+                data:{loveMusicName:loveMusicName},
+                dataType: "json",
+                success: function(data){
+                    console.log(data.length);
+                    console.log(data);
+                    var s = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var musicUrl = data[i].url+".mp3";
+                        s += "<tr>";
+                        s += "<td>" + data[i].title + "</td>";
+                        s += "<td>" + data[i].singer + "</td>";
+                        s += "<td <a href=\"\">  <audio src= \""+ musicUrl+"\"  + controls=\"controls\" preload=\"auto\" loop=\"loop\">  >"  + "</audio> </a> </td>";
+                        s+="<td > <button class='btn btn-default btn-sm' onclick=\"deleteInfo("+ data[i].id + ")\" > 移除</button> " +
+                            "</td>";
+                        s += "</tr>";
+                    }
+                    $("#info").html(s);
+                }
+            });
+        }
+
+        function deleteInfo(obj) {
+            console.log(obj);
+            $.ajax({
+                url:"/OnlineMusic/removeLoveServlet",
+                type: "post",
+                //发送给后端的数据
+                data: {"id": obj},
+                dataType: "json",
+                success: function (data) {
+                    if(data.msg===true){
+                        alert("移除成功");
+                        window.location.href="/OnlineMusic/loveMusic.html";
+                    }else{
+                        alert("移除失败");
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            $("#submit1").click(function () {
+                var name = $("#exampleInputName2").val();
+                load(name);
+            });
+        });
+    </script>
+</head>
+<body id="body">
+<div class="container">
+    <h3 style="text-align: center">我喜欢的列表</h3>
+    <div style="float: left;">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="exampleInputName2">歌曲名</label>
+                <input name="name" type="text" class="form-control" id="exampleInputName2" >
+            </div>
+            <button id="submit1" type="button" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <div style="float: right;margin-bottom: 15px">
+        <a class="btn btn-primary" href="/OnlineMusic/list.html">回到首页</a>
+    </div>
+    <table border="1" class="table table-bordered table-hover">
+        <tr class="success">
+            <th>歌名</th>
+            <th>歌手</th>
+            <th>歌曲</th>
+            <th>操作</th>
+        </tr>
+        <tbody id="info" valign="middle">
+
+        </tbody>
+    </table>
+    <div>
+        <nav aria-label="Page navigation">
+            <ul id="all" class="pagination">
+
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

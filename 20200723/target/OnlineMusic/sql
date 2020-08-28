@@ -1,0 +1,35 @@
+create table user (
+id int primary key auto_increment,
+name varchar(200) unique,
+password varchar(200) not null
+);
+
+create table music (
+id int primary key auto_increment,
+title varchar(200) not null,
+singer varchar(200) not null,
+time varchar(20) not null,
+url varchar(200) not null
+);
+
+create table loveMusic (
+id int primary key auto_increment,
+userId int not null,
+musicId int not null,
+foreign key (userId) references user(id),
+foreign key (musicId) references music(id)
+);
+
+create table mv (
+id int primary key auto_increment,
+message varchar(200) not null,
+url varchar(200) not null
+);
+
+create table loveMv (
+id int primary key auto_increment,
+userId int not null,
+mvId int not null,
+foreign key (userId) references user(id),
+foreign key (mvId) references mv(id)
+);

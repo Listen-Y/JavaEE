@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <!-- 使用Edge最新的浏览器的渲染方式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+    width: 默认宽度与设备的宽度相同
+    initial-scale: 初始的缩放比，为1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>OnlineMusic播放器实现</title>
+
+    <link rel="shortcut icon" href="#" />
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <!-- <script src="js/bootstrap.min.js"></script>-->
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+    </style>
+
+    <style>
+        #body{
+            background-image: url("images/w.jpg");
+            background-size:100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            load();
+        });
+        function load(musicName){
+            $.ajax({
+                url: "/OnlineMusic/findMusic",
+                type:"get",
+                data:{musicName:musicName},
+                dataType: "json",
+                success: function(data){
+                    console.log(data.length);
+                    console.log(data);
+                    var s = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var musicUrl = data[i].url+".mp3";
+                        s += "<tr>";
+                        s += "<th> <input id=\""+data[i].id+ "\" type=\"checkbox\"> </th>";
+                        s += "<td>" + data[i].title + "</td>";
+                        s += "<td>" + data[i].singer + "</td>";
+                        s += "<td <a href=\"\">  <audio src= \""+ musicUrl+"\"  + controls=\"controls\" preload=\"auto\" loop=\"loop\">  >"  + "</audio> </a> </td>";
+                        s += "</tr>";
+                    }
+
+                    $("#info").html(s);
+
+                    var audios = document.getElementsByTagName("audio");
+                    // 暂停函数
+                    function pauseAll() {
+                        var self = this;
+                        [].forEach.call(audios, function (i) {
+                            // 将audios中其他的audio全部暂停
+                            i !== self && i.pause();
+                        })
+                    }
+                    // 给play事件绑定暂停函数
+                    [].forEach.call(audios, function (i) {
+                        i.addEventListener("play", pauseAll.bind(i));
+                    });
+                }
+            });
+        }
+
+        function loveInfo(obj) {
+            console.log(obj);
+            $.ajax({
+                url:"/OnlineMusic/loveMusicServlet",
+                type: "post",
+                //发送给后端的数据
+                data: {"id": obj},
+                dataType: "json",
+                success: function (data) {
+                    if(data.msg===true){
+                        alert("加入喜欢的列表成功");
+                        window.location.href="list.html";
+                    }else{
+                        alert("加入喜欢的列表失败或者已经存在该音乐");
+                    }
+                }
+            });
+        }
+
+        function deleteInfo(obj) {
+            console.log(obj);
+            $.ajax({
+                url:"/OnlineMusic/deleteServlet",
+                type: "post",
+                //发送给后端的数据
+                data: {"id": obj},
+                dataType: "json",
+                success: function (data) {
+                    if(data.msg===true){
+                        alert("删除成功");
+                        window.location.href="list.html";
+                    }else{
+                              if (data.msg==="error") {
+                              alert("非管理员账号不可删除");
+                              } else{
+                              alert("删除失败");
+                              }
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            $("#submit1").click(function () {
+                var name = $("#exampleInputName2").val();
+                load(name);
+            });
+            //请求完成了
+            $.when(load).done(function () {
+                //选取所有类型为CheckBox的元素
+                $("#delete").click(function () {
+                    var i=0;
+                    var id=new Array();
+                    $(":checkbox").each(function () {
+                        //如果被选中
+                        if($(this).is(':checked')){
+                            //获取id的值，存储到id数组当中
+                            id[i] = $(this).attr("id");
+                            i++;
+                        }
+                    });
+                    //发送ajax请求
+                    $.ajax({
+                        url:"/OnlineMusic/deleteSelMusicServlet",
+                        //将id数组，发送给deleteSelectedServlet
+                        data:{"id":id},
+                        type: "POST",
+                        dataType:"json",
+                        success:function (data) {
+                            if(data.msg===true){
+                                alert("删除成功");
+                                window.location.href="list.html";
+                            }else{
+                                if (data.msg==="error") {
+                              alert("非管理员账号不可删除");
+                              } else{
+                              alert("删除失败");
+                              }
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body id="body">
+<div class="container">
+    <h3 style="text-align: center;">欢迎游客来到Listen-Y播放器点击登录可进行登录</h3>
+    <div style="float: left;">
+        <form class="form-inline">
+            <div class="form-group">
+                <label style="font-family: Tahoma, Geneva, sans-serif;
+font-size: 20px;
+font-weight: bold;
+" for="exampleInputName2">歌曲名</label>
+                <input name="name" type="text" class="form-control" id="exampleInputName2" >
+            </div>
+            <button id="submit1" type="button" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <div style="float: right;margin-bottom: 15px">
+        <a class="btn btn-primary" href="/OnlineMusic/login.html">登录</a>
+        <a class="btn btn-primary" href="/OnlineMusic/register.html">注册</a>
+
+    </div>
+    <table border="1" class="table table-bordered table-hover">
+        <tr class="success">
+            <th>选择</th>
+            <th>歌名</th>
+            <th>歌手</th>
+            <th>歌曲</th>
+        </tr>
+        <tbody id="info" valign="middle">
+
+        </tbody>
+    </table>
+    <div>
+        <nav aria-label="Page navigation">
+            <ul id="all" class="pagination">
+
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+      <title>Welcome To OnlineMusic</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <!--<script src="js/bootstrap.min.js"></script>-->
+	  <script type="text/javascript"></script>
+	  <style>
+		  #body{
+			  background-image: url("images/x.jpg");
+              background-size:100% 100%;
+              background-attachment: fixed;
+      }
+      </style>
+	  <script>
+		  //登录请求
+		  $(function () {
+		  	$("#submit").click(function () {
+				var username=$("#user").val();
+				var password=$("#password").val();
+				$.ajax({
+					url:"/OnlineMusic/loginServlet",
+                    data:{"username":username,"password":password},
+                    type:"POST",
+					dataType:"json",
+					success:function (data) {
+                        console.log(data);
+                        if(data.msg==="ok"){
+                            window.location.href="list.html";
+                        } else{
+                            if(data.msg==="register") {
+                            alert("账号未注册，请注册!");
+                            $("#message").text("账号未注册，请注册!");
+                            $("#user").val("");
+                            $("#password").val("");
+                            $("#verifycode").val("");
+                            } else {
+                            /*window.location.reload();*/
+                            alert("账号或密码错误，请重试!");
+                            $("#message").text("账号或密码错误，请重试!");
+                            $("#user").val("");
+                            $("#password").val("");
+                            $("#verifycode").val("");
+                            }
+                        }
+					}
+				});
+			});
+		  });
+	  </script>
+  </head>
+  <body id="body">
+  	<div class="container" style="width: 400px;margin-top: 110px;background-color: rgba(255,255,255,0.8)">
+  		<h3 style="text-align: center;">用户登录</h3>
+<!--        <form action="login" method="post">-->
+	      <div class="form-group" >
+	        <label for="user">用户名：</label>
+	        <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/>
+	      </div>
+	      
+	      <div class="form-group">
+	        <label for="password">密码：</label>
+	        <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码"/>
+	      </div>
+
+	      <hr/>
+	      <div class="form-group" style="text-align: center;"><!--class="form-group"-->
+	        <input style="width: 200px;height: 40px" id="submit" class="btn btn btn-primary" type="button" value="登录" >
+			  <a class="btn btn btn-primary" href="register.html">注册</a>
+		  </div>
+<!--	  	</form>-->
+		<!-- 出错显示的信息框 -->
+	  	<div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" >
+		  	<span>&times;</span>
+		  </button>
+		   <strong id="message">您尚未登录, 请登录!</strong>
+		</div>
+  	</div>
+  </body>
+</html>

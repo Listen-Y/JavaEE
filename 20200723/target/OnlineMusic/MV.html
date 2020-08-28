@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MV播放页面</title>
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <style>
+		  #body{
+			  background-image: url("images/w.jpg");
+              background-size:100% 100%;
+              background-attachment: fixed;
+      }
+      </style>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <style type="text/css">
+        td, th {
+            text-align: center;
+        }
+        .mydiv {
+            width: 1000px;
+            height: 1000px;
+            position: absolute;
+            left: 200px;
+            top: 130px;
+        }
+    </style>
+</head>
+<body id="body">
+<div class="container">
+    <h3 style="text-align: center">MV播放首页</h3>
+    <div style="float: left;">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="exampleInputName2">MV名</label>
+                <input name="name" type="text" class="form-control" id="exampleInputName2" >
+            </div>
+            <button id="submit1" type="button" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <div style="float: right;margin-bottom: 15px">
+        <a class="btn btn-primary" href="/OnlineMusic/list.html">回到首页</a>
+        <a class="btn btn-primary" href="/OnlineMusic/loveVideo.html">我喜欢的MV</a>
+        <a class="btn btn-primary" href="/OnlineMusic/uploadVideo.html">添加MV</a>
+    </div>
+
+    <div class="mydiv">
+        <div>
+            <video src="video/dy1.mp4" controls="controls" width=20%> </video>
+            <h3 style="margin-left: 30px">{{MVname}}</h3>
+            <a class="btn btn btn-primary" href="/OnlineMusic/list.html"  >喜欢</a>
+            <span style="margin-left:70px"></span><a class="btn btn btn-primary" href="/OnlineMusic/list.html"  >删除</a>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
