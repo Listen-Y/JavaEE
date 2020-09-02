@@ -1,0 +1,53 @@
+<html>
+ <head>
+ <title>第⼀个⻚⾯</title>
+ </head>
+ <body>
+ <h1>标题</h1>
+ <h2>标题</h2>
+ <p>段落标签</p>
+ <p>段落标签</p>
+ <span>⽂本标签</span>
+ <span>⽂本标签</span>
+ <span>⽂本标签</span>
+ <div>
+ <span>⽂本标签</span>
+ <span>⽂本标签</span>
+ </div>
+  <img src="images/t.png">
+ <table border="1" >
+ <tr>
+ <td>123</td>
+ <td colspan="2">234</td>
+ </tr>
+ <tr>
+ <td rowspan="2">123</td>
+ <td>234</td>
+ <td>345</td>
+ </tr>
+ <tr>
+ <td>123</td>
+ <td>234</td>
+ <td>345</td>
+ </tr>
+ </table>
+ <script type="text/javascript">
+ document.getElementById("title").innerHTML = "javascript";
+ document.getElementById("title").style.background = "red";
+ function clickMe(){
+ document.getElementById("title").innerHTML = "java";
+ }
+ var time = 0;
+ var timer;
+ function add(){
+ time++;
+ document.getElementById("title").innerHTML = time;
+ if (time < 3) {
+ timer = setTimeout(add, 1000);
+ }else {
+ clearTimeout(timer);
+ }
+ }
+</script>
+ </body>
+</html>
