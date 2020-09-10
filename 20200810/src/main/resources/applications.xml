@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 通过bean这个标签定义bean对象 Spring Bean容器是通过id来进行管理的 id代表的意思就是Spring可以通过id找到Bean
+     如果没有提供id 会默认生成一个首字母小写的类名 一般建议都是写id的
+     默认是单例模式-->
+    <!-- 通过无惨的构造方法创建一个对象 如果该类型没有无惨的构造方法 就会报错 所以这个只支持有参构造方法 -->
+    <bean id="love" class="java.lang.String" >
+        <constructor-arg value="love" />
+    </bean>
+
+    <!-- 如果构造方法是无惨的可以使用这种进行设置属性 上面的叫构造方法注入 这叫属性setter注入(简称属性注入) -->
+    <bean id="person" class="Listen.Person">
+        <property name="name" value="listen" />
+        <property name="age" value="21" />
+    </bean>
+    <!-- 通过构造方法创建一个person实例 -->
+    <bean id="person2" class="Listen.Person">
+        <constructor-arg name="name" value="frank" />
+        <constructor-arg name="age" value="20" />
+    </bean>
+
+    <bean id="person3" class="Listen.Person">
+        <property name="name" value="jake" />
+        <property name="age" value="22" />
+    </bean>
+
+    <!-- 分别使用依赖注入和属性注入 创建实例  -->
+    <bean id="teacher1" class="Listen.Teacher">
+        <constructor-arg name="person" ref="person" />
+        <constructor-arg name="teacherId" value="5201314"/>
+    </bean>
+    
+    <bean id="teacher2" class="Listen.Teacher">
+        <property name="person" ref="person2" />
+        <property name="teacherId" value="7654321" />
+    </bean>
+
+    <bean id="teacher3" class="Listen.Teacher">
+        <property name="person" ref="person3" />
+        <property name="teacherId" value="1234567" />
+    </bean>
+    <!-- 注入带有集合的属性  -->
+    <bean id="school" class="Listen.School">
+        <property name="teachers">
+            <list>
+                <ref bean="teacher1" />
+                <ref bean="teacher2" />
+                <ref bean="teacher3" />
+            </list>
+        </property>
+        <property name="schoolName" value="HappySchool" />
+    </bean>
+    <!--  链式结构的bean容器对象管理 -->
+    <bean id="duck1" class="Listen.Duk">
+        <property name="name" value="北京烤鸭" />
+        <property name="age" value="1" />
+        <property name="next" ref="duck2" />
+    </bean>
+
+    <bean id="duck3" class="Listen.Duk">
+        <property name="name" value="酱鸭" />
+        <property name="age" value="3" />
+    </bean>
+
+    <bean id="duck2" class="Listen.Duk">
+        <property name="name" value="甜皮鸭" />
+        <property name="age" value="2" />
+        <property name="next" ref="duck3" />
+    </bean>
+
+
+
+</beans>
