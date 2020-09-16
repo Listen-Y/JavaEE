@@ -32,3 +32,9 @@ dishId int,
 foreign key(orderId) references order_user(orderId),
 foreign key(dishId) references dish(dishId)
 );
+
+drop table if exists hot_dish;
+  create table hot_dish(
+  dishId int unique,
+  count int not null
+  );

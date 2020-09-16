@@ -26,7 +26,7 @@ public class OrderSystemUtil {
         // 此处有一个重要的注意事项!!! 构造 String 的时候, 必须要指定
         // 该字符串的编码方式. (这个操作相当于就是把字节数据转成字符数据)
         // 涉及到这样的转换, 最好都加上编码方式.
-        // 如果不加, 不一定 100% 出错, 有一定的风险.
+        // 如果一定 10不加, 不0% 出错, 有一定的风险.
         return new String(body, StandardCharsets.UTF_8);
     }
 

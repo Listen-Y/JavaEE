@@ -69,6 +69,8 @@ public class OrderServlet extends HttpServlet {
             if (dishIds == null || dishIds.length == 0) {
                 throw new OrderSystemException("未选菜, 或点击菜单刷新");
             }
+            //将所下单的所有菜品的count加一
+            allDishesAdd(dishIds);
             //数据库处理
             //制作一个订单
             Order order = new Order();
@@ -95,6 +97,11 @@ public class OrderServlet extends HttpServlet {
             String jsonStr = gson.toJson(response);
             resp.getWriter().write(jsonStr);
         }
+
+    }
+
+    //处理将所以dishId的count加一
+    private void allDishesAdd(Integer[] dishIds) {
 
     }
 
