@@ -1,0 +1,45 @@
+请求：
+POST /loginServlet
+data：{username,password}
+响应：
+{msg: true}
+
+请求：
+POST /registerServlet
+data：{username,password}
+响应：
+{msg: true}
+
+请求1：上传音乐到服务器目录
+POST /upload
+请求2：将音乐信息同步插入到数据库当中
+POST /uploadsucess
+
+请求：
+POST /deleteServlet
+data: {"id": id}
+响应：
+{msg: true}
+
+请求：
+POST /deleteSelMusicServlet
+data:{"id":id}//id为数组
+响应：
+{msg: true}
+
+请求：
+POST /findLoveMusic
+data:{musicName:musicName}
+
+请求：
+POST /loveMusicServlet
+data: {"id": obj}
+响应：
+{msg: true}
+
+请求：
+POST /removeLoveServlet
+data: {"id": obj}
+
+请求：
+GET /cancellationServlet
