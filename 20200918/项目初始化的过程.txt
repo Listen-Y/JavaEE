@@ -1,0 +1,6 @@
+1.安装WindowBuilder插件(大家自己到百度查一下怎样安装)。
+2.新建一个项目：BookMIS
+3.复制lib目录到项目根目录下；
+     在jar包右键-->Build Path-->Add to build path
+4.复制img目录到项目的src目录下：
+5.在项目上右键-->Properties-->左侧：Resource，右侧选择编码：UTF-8
