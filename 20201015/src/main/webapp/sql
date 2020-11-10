@@ -1,0 +1,7 @@
+create database java_10_16;
+use java_10_16;
+create table user (
+id int primary key auto_increment,
+age int not null,
+name varchar(20) not null
+);
