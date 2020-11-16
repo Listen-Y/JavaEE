@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 使用spring创建对象, 在spring中这些都称为bean -->
+
+    <bean id="address" class="hello.Address">
+        <constructor-arg index="0" value="陕西省西安市"/>
+    </bean>
+
+    <bean id="student" class="hello.Student">
+        <!--普通值注入-->
+        <property name="name" value="Listen"/>
+        <!--引用类型注入-->
+        <property name="address" ref="address"/>
+        <!--数组注入-->
+        <property name="books">
+            <array>
+                <value>西游记</value>
+                <value>水浒传</value>
+                <value>三国演义</value>
+            </array>
+        </property>
+        <!--List注入-->
+        <property name="hobbes">
+            <list>
+                <value>听歌</value>
+                <value>看电影</value>
+                <value>跑步</value>
+            </list>
+        </property>
+        <!--map注入-->
+        <property name="cards">
+            <map>
+                <entry key="公交卡" value="101010"/>
+                <entry key="学生卡" value="232323"/>
+                <entry key="饭卡" value="776655"/>
+            </map>
+        </property>
+        <!--set注入-->
+        <property name="games">
+            <set>
+                <value>LOL</value>
+                <value>CF</value>
+                <value>QQ</value>
+            </set>
+        </property>
+        <!--空注入null-->
+        <property name="wife">
+            <null/>
+        </property>
+        <!--特殊类型-->
+        <property name="info">
+            <props>
+                <prop key="父亲">XXX</prop>
+                <prop key="母亲">YYY</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
