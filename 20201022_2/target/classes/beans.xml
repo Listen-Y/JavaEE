@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启自动配置-->
+    <context:annotation-config/>
+
+    <!-- 使用spring创建对象, 在spring中这些都称为bean -->
+    <bean id="cat1" class="model.Cat"/>
+    <bean id="cat" class="model.Cat"/>
+    <bean id="dog" class="model.Dog"/>
+    <bean id="people" class="model.People">
+        <property name="name" value="Listen"/>
+        <property name="cat" ref="cat"/>
+        <property name="dog" ref="dog"/>
+    </bean>
+
+    <bean id="people1" class="model.People" autowire="byName">
+        <property name="name" value="Bike"/>
+    </bean>
+
+    <bean id="people2" class="model.People" autowire="byType">
+        <property name="name" value="Flake"/>
+    </bean>
+
+    <bean id="people3" class="model.People">
+        <property name="name" value="Mink"/>
+    </bean>
+
+    <bean id="people4" class="model.People"/>
+
+</beans>

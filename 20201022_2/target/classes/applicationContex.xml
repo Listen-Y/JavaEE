@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 使用spring创建对象, 在spring中这些都称为bean -->
+    <!--使用p命名直接注入值, 相当于property, 但是在使用前必须加约束xmlns:p="http://www.springframework.org/schema/p"-->
+    <bean id="user" class="User" p:name="Listen" p:age="20" scope="prototype"/>
+    <bean id="user1" class="User" p:name="Listen" p:age="20" scope="singleton"/>
+
+    <!--c命名注入就相当于使用有参构造方法注入, 相当于constructor-args-->
+    <bean id="user2" class="User" c:age="22" c:name="Bike"/>
+
+</beans>
