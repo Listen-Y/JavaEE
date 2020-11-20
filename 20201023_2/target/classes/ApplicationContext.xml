@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--使用spring的方式, 就必须注册使用类的bean对象-->
+    <bean id="service" class="aop.Service"/>
+    <bean id="logBefore" class="aop.LogBefore"/>
+    <bean id="logAfter" class="aop.LogAfter"/>
+
+    <aop:config>
+        <!--配置被代理类的切入点, 注意execution的使用规则第一个* 代表任意返回类型,
+        第二个参数表示切入点, .*表示这个类的全部方法, ..表示参数是任意的-->
+        <aop:pointcut id="pointcut" expression="execution(* aop.Service.*(..))"/>
+        <!--切入点与通知的连接, 完成横切关注点的任务-->
+        <aop:advisor advice-ref="logBefore" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="logAfter" pointcut-ref="pointcut"/>
+    </aop:config>
+
+
+</beans>
