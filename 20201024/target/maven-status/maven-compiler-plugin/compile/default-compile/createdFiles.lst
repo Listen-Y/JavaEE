@@ -1,0 +1,4 @@
+myProxy\Database.class
+myProxy\Log.class
+annotationProxy\Log.class
+myProxy\Dao.class
