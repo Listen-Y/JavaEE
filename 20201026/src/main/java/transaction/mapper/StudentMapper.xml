@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="transaction.mapper.StudentMapper">
+
+    <select id="selectStudent" resultType="student">
+        select * from student;
+    </select>
+
+    <insert id="insert" parameterType="student">
+        insert into student(name, hobby) values(#{name}, #{hobby});
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from student where id=#{id};
+    </delete>
+
+</mapper>
