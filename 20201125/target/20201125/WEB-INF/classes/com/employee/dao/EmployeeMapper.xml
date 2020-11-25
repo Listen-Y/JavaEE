@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.employee.dao.EmployeeMapper">
+    <select id="select" resultType="employee">
+        select * from employee;
+    </select>
+
+    <select id="query" resultType="employee" parameterType="_int">
+        select * from employee where id=#{id};
+    </select>
+
+    <insert id="add" parameterType="employee">
+        insert into employee(name, sex, entry, depart, phone)
+        VALUES (#{name}, #{sex}, CURDATE(), #{depart}, #{phone});
+    </insert>
+
+    <delete id="delete" parameterType="_int">
+        delete from employee where id=#{id};
+    </delete>
+
+    <update id="update" parameterType="map">
+        update employee
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="depart != null">
+                depart=#{depart},
+            </if>
+            <if test="phone != null">
+                phone=#{phone}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>
