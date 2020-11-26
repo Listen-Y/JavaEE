@@ -1,12 +1,10 @@
 package com.employee.service;
 
-import com.employee.pojo.Admin;
 import com.employee.pojo.Employee;
-import com.employee.utils.MD5Utils;
 import junit.framework.TestCase;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,5 +54,13 @@ public class EmployeeServiceImplTest extends TestCase {
         map.put("depart", "管理部");
         map.put("phone", "99999999999");
         System.out.println(employeeService.update(map));
+    }
+
+    public void testSelectLike() {
+        Logger logger = Logger.getLogger(EmployeeServiceImplTest.class);
+        logger.debug("hahaha");
+        for (Employee employee : employeeService.selectLike("%张%")) {
+            System.out.println(employee);
+        }
     }
 }

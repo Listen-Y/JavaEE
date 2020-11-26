@@ -16,6 +16,7 @@ import java.util.Map;
 public interface EmployeeMapper {
 
     List<Employee> select();
+    List<Employee> selectLike(@Param("keyWords") String keyWords);
     Employee query(@Param("id") int id);
     int add(Employee employee);
     int delete(@Param("id") int id);

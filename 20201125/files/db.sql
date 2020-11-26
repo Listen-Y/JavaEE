@@ -1,4 +1,4 @@
-creata database java_11_25;
+create database java_11_25;
 use java_11_25;
 
 create table admin

@@ -72,8 +72,9 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.1.4.RELEASE</version>
+      <version>4.3.13.RELEASE</version>
     </dependency>
+
 
     <!--spring操作数据库的话, 需要一个连接包-->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
@@ -115,12 +116,12 @@
       <version>2.9.8</version>
     </dependency>
 
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/log4j/log4j &ndash;&gt;
+    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
-    </dependency>-->
+    </dependency>
 
     <!--MD5依赖-->
     <dependency>
@@ -140,7 +141,7 @@
 
 
   <build>
-    <finalName>20201125</finalName>
+    <finalName>employee</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

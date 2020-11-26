@@ -1,8 +1,6 @@
 package com.employee.service;
 
 import com.employee.pojo.Employee;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +18,5 @@ public interface EmployeeService {
     int add(Employee employee);
     int delete(int id);
     int update(Map<String, Object> map);
+    List<Employee> selectLike(String keyWords);
 }

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +28,11 @@ public class EmployeeController {
     EmployeeService employeeService;
 
 
+    /**
+     * 获取所有员工数据, 返回modelAndView
+     * @param model
+     * @return
+     */
     @RequestMapping("/success")
     public String success(Model model) {
         System.out.println("[DEBUG] success");
@@ -37,6 +41,14 @@ public class EmployeeController {
         return "showAll";
     }
 
+    /**
+     * 添加一个员工
+     * @param name
+     * @param sex
+     * @param depart
+     * @param phone
+     * @return
+     */
     @RequestMapping(value = "/add", produces = "text/html;charset=utf-8")
     @ResponseBody
     public String add(String name, String sex, String depart, String phone) {
@@ -60,18 +72,35 @@ public class EmployeeController {
 
     }
 
+    /**
+     * 方便页面跳转
+     * @return
+     */
     @RequestMapping("/addEmployee")
     public String newEmployee() {
         return "add";
     }
 
-    //支持模糊查询
+    /**
+     * 支持模糊查询
+     * @param keyWords
+     * @param model
+     * @return
+     */
     @RequestMapping("/findLike")
-    public List<Employee> findLike() {
-        return null;
+    public String findLike(String keyWords, Model model) {
+        List<Employee> list = employeeService.selectLike("%" + keyWords + "%");
+        if (list.size() == 0) model.addAttribute("ERROR", "未找到");
+        model.addAttribute("list", list);
+        return "showAll";
     }
 
-    //修改数据
+    /**
+     * 根据id得到员工数据, 然后返回修改数据页面
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/update/{id}")
     public String update(@PathVariable("id")int id, Model model) {
         Employee employee = employeeService.query(id);
@@ -79,6 +108,15 @@ public class EmployeeController {
         return "update";
     }
 
+    /**
+     * 执行修改员工数据的操作
+     * @param id
+     * @param name
+     * @param sex
+     * @param depart
+     * @param phone
+     * @return
+     */
     @RequestMapping(value = "/update", produces = "text/html;charset=utf-8")
     @ResponseBody
     public String update(int id, String name, String sex, String depart, String phone) {
@@ -104,6 +142,7 @@ public class EmployeeController {
         if (query.getSex() != sexNum) map.put("sex", sexNum);
         if (!query.getDepart().equals(depart)) map.put("depart", depart);
         if (!query.getPhone().equals(phone)) map.put("phone", phone);
+        if (map.size() <= 1) return "OK";
 
 
         int update = employeeService.update(map);
@@ -112,15 +151,24 @@ public class EmployeeController {
         }
     }
 
-    //查看具体信息
-    @RequestMapping("/query")
+    /**
+     * 查看某个员工的详细信息
+     * @param employeeId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/query")
     public String query(int employeeId, Model model) {
         Employee employee = employeeService.query(employeeId);
         model.addAttribute("employee", employee);
         return "detials";
     }
 
-    //删除
+    /**
+     * 删除一个员工
+     * @param employeeId
+     * @return
+     */
     @RequestMapping("/delete")
     public String delete(int employeeId) {
         int delete = employeeService.delete(employeeId);

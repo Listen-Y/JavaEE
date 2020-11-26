@@ -18,6 +18,11 @@ public class AdminServiceImpl implements AdminService {
         this.adminMapper = adminMapper;
     }
 
+    /**
+     * 按名字查询管理员
+     * @param name
+     * @return
+     */
     @Override
     public Admin query(String name) {
         return adminMapper.query(name);

@@ -1,8 +1,6 @@
 package com.employee.utils;
 
 import com.employee.pojo.Department;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 
 /**
@@ -24,6 +22,8 @@ public class MessageCheck {
     }
 
     private static boolean checkName(String name) {
+
+        if (name.trim().length() == 0) return false;
         //如果名字里有数字即为不符合
         for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);

@@ -1,7 +1,6 @@
 package com.employee.service;
 
 import com.employee.pojo.Admin;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * Created with IntelliJ IDEA.
