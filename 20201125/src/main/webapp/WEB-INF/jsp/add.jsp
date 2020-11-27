@@ -14,6 +14,14 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
+
+    <style>
+        #body{
+            background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606454884809&di=aec27cdf8431b3821de04c20ea2244a5&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1405%2F13%2Fc8%2F34166786_1399947992874.jpg");
+            background-size:100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
     <script>
         function add(){
             $.ajax({
@@ -33,8 +41,22 @@
 
 
 </head>
-<body>
+<body id="body">
 <div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header"></div>
+            <h1 style="font-family: Tahoma, Geneva, sans-serif;color: #050000;font-size: 18px;font-weight: bold;">
+                添加员工
+            </h1>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header"></div>
+            <h1></h1>
+        </div>
+    </div>
     <div class="row clearfix">
         <div>
             <div class="input-group">

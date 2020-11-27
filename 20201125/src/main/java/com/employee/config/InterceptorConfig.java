@@ -18,6 +18,10 @@ public class InterceptorConfig implements HandlerInterceptor {
         //如果已经登录过就放行
         //如果访问的是login也放行
         //其他的就拦截
+        if (httpServletRequest.getRequestURI().contains("css") || httpServletRequest.getRequestURI().contains("images")) {
+            //静态资源放行
+            return true;
+        }
         if (httpServletRequest.getSession().getAttribute("admin") != null) {
             return true;
         }

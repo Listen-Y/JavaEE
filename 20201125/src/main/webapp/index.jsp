@@ -8,39 +8,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>首页</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript"></script>
+    <style>
+        #body{
+            background-image: url("images/x.jpg");
+            background-size:100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
+
     <%--导包--%>
     <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
 
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>首页</title>
-
-
-
-    <link rel="stylesheet" href="./assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="./assets/css/app.css">
-    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-    <script src="./assets/js/amazeui.ie8polyfill.min.js"></script>
-    <script src="./assets/js/amazeui.min.js"></script>
-    <script src="./assets/js/app.js"></script>
 
     <script>
         function login(){
             $.ajax({
                 url:"${pageContext.request.contextPath}/login",
                 type: "POST",
-                data:{"name":$("#name").val(),"password":$("#pwd").val()},
+                data:{"name":$("#user").val(),"password":$("#password").val()},
                 success:function (data) {
                     if (data==="OK"){
                         window.location.href = '${pageContext.request.contextPath}/success';
                     } else {
-                            alert(data.toString())
+                        $("#message").text(data.toString());
+                        $("#user").val("");
+                        $("#password").val("");
                     }
                 }
             });
@@ -51,29 +46,29 @@
     </script>
 
 </head>
-<body>
-<header>
-</header>
+<body id="body">
+<div class="container" style="width: 400px;margin-top: 110px;background-color: rgba(255,255,255,0.8)">
+    <h3 style="text-align: center;">用户登录</h3>
+    <div class="form-group" >
+        <label for="user">用户名：</label>
+        <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/>
+    </div>
 
-<div class="log">
-    <div class="am-g">
-        <div class="am-u-lg-3 am-u-md-6 am-u-sm-8 am-u-sm-centered log-content">
-            <h1 class="log-title am-animation-slide-top">管理员登录</h1>
-            <br>
-            <div class="am-form" id="log-form">
-                <div class="am-input-group am-animation-slide-left log-animation-delay">
-                    <input id="name" type="text" class="am-form-field am-radius log-input" placeholder="管理员账号" minlength="5" required>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <div class="am-input-group am-animation-slide-left log-animation-delay">
-                    <input id="pwd"  type="password" class="am-form-field am-radius log-input" placeholder="密码" minlength="6" required>
-                    <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
-                </div>
-                <br>
-                <button class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay" onclick="login()">登 录</button>
-            </div>
-        </div>
+    <div class="form-group">
+        <label for="password">密码：</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码"/>
+    </div>
+
+    <hr/>
+    <div class="form-group" style="text-align: center;">
+        <button style="width: 200px;height: 40px" id="submit" onclick="login()" class="btn btn btn-primary">登录</button>
+    </div>
+    <!-- 出错显示的信息框 -->
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" >
+            <span>&times;</span>
+        </button>
+        <strong id="message">您尚未登录, 请登录!</strong>
     </div>
 </div>
 </body>
