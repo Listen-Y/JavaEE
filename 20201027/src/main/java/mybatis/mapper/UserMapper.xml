@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace空间命名必须和对应的mapper接口一致-->
+<mapper namespace="mybatis.mapper.UserMapper">
+
+    <select id="select" resultType="mybatis.model.User">
+        select * from User;
+    </select>
+
+    <insert id="insert" parameterType="mybatis.model.User">
+        insert into user(id, name, pwd) values(#{id}, #{name}, #{pwd})
+    </insert>
+
+    <select id="selectOne" parameterType="int" resultType="mybatis.model.User">
+        select * from user where id=#{id};
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from user where id=#{id};
+    </delete>
+
+    <update id="update" parameterType="mybatis.model.User">
+        update user set name=#{name}, pwd=#{pwd} where id=#{id};
+    </update>
+
+    <select id="selectUserLike" parameterType="String" resultType="mybatis.model.User">
+        select * from user where name like #{value};
+    </select>
+
+    <update id="updateByMap" parameterType="map">
+        update user set name=#{newName}, pwd=#{newPwd} where id=#{id};
+    </update>
+
+    <select id="selectUserById" parameterType="int" resultType="User">
+        select id, name, pwd as password from user where id=#{id};
+    </select>
+
+    <select id="selectUserById2" parameterType="int" resultMap="resultMap">
+        select * from user where id=#{id};
+    </select>
+
+    <resultMap id="resultMap" type="user">
+        <result column="pwd" property="password"/>
+    </resultMap>
+
+</mapper>
