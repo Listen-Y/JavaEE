@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.ClassRoomDao">
+
+    <select id="getClassRoom" parameterType="_int" resultMap="classRoomMap">
+        select * from teacher where id=#{tid};
+    </select>
+
+    <resultMap id="classRoomMap" type="classRoom">
+        <association property="teacher" javaType="teacher">
+            <result column="id" property="id"/>
+            <result column="name" property="name"/>
+        </association>
+        <collection property="students" javaType="ArrayList" ofType="student" column="id" select="students"/>
+    </resultMap>
+
+    <select id="students" resultType="student">
+        select id, name from student where tid=#{id};
+    </select>
+
+
+    <!--===============================================-->
+
+    <select id="getClassRoom2" parameterType="_int" resultMap="classRoomMap2">
+        select s.id sid, s.name sname, t.id tid, t.name tname from student s, teacher t where s.tid=t.id and t.id=#{tid};
+    </select>
+
+    <resultMap id="classRoomMap2" type="classRoom">
+            <result column="tid" property="tid"/>
+            <result column="tname" property="tname"/>
+        <collection property="students" javaType="ArrayList" ofType="student">
+            <result column="sid" property="id"/>
+            <result column="sname" property="name"/>
+        </collection>
+    </resultMap>
+
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.dao.StudentDao">
+    <!--==============================================================-->
+    <select id="selectStudent" resultMap="studentTeacher">
+        select * from student;
+    </select>
+
+    <resultMap id="studentTeacher" type="student">
+        <association property="teacher" javaType="teacher" column="tid" select="selectOneTeacher"/>
+    </resultMap>
+
+    <select id="selectOneTeacher" resultType="teacher">
+        select * from teacher where id=#{tid};
+    </select>
+
+    <!--================================-->
+    <select id="selectStudent2" resultMap="studentTeacher2">
+        select s.id sid, s.name sname, t.name tname from student s, teacher t where s.tid=t.id;
+    </select>
+
+    <resultMap id="studentTeacher2" type="student">
+        <result column="sid" property="id"/>
+        <result column="sname" property="name"/>
+        <association property="teacher" javaType="teacher">
+            <result column="tname" property="name"/>
+        </association>
+    </resultMap>
+    <!--===================================-->
+    <select id="insert" parameterType="map">
+        insert into student(name, tid) values(#{name}, #{tid});
+    </select>
+
+</mapper>
