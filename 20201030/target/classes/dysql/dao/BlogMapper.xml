@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dysql.dao.BlogDao">
+    <select id="selectBlog" resultType="blog">
+        select * from blog;
+    </select>
+
+    <insert id="insert" parameterType="blog">
+        insert into blog values(#{id}, #{title}, #{author}, #{createTime}, #{views});
+    </insert>
+
+    <select id="selectBlogNeed" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+            <if test="title != null">
+                and title=#{title}
+            </if>
+            <if test="author != null">
+                and author=#{author}
+            </if>
+            <if test="views != null">
+                and views = #{views}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBlogChoose" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="id != null">
+                    id=#{id}
+                </when>
+                <when test="title != null">
+                    title=#{title}
+                </when>
+                <when test="author != null">
+                    author=#{author}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="update" parameterType="map">
+        update blog
+        <set>
+            <if test="newTitle != null">
+                title=#{newTitle},
+            </if>
+            <if test="newAuthor != null">
+                author=#{newAuthor},
+            </if>
+            <if test="newViews != null">
+                views = #{newViews}
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+            <if test="title != null">
+                and title=#{title}
+            </if>
+            <if test="author != null">
+                and author=#{author}
+            </if>
+            <if test="views != null">
+                and views = #{views}
+            </if>
+        </where>
+    </update>
+
+<!--    <select id="selectBlogForEach" parameterType="list" resultType="blog">
+        select * from blog
+        <where>
+            id in
+            <foreach collection="list" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </where>
+    </select>-->
+
+    <select id="selectBlogForEach" parameterType="list" resultType="blog">
+        select * from blog
+        <where>
+            <foreach collection="list" open="(" separator=" or " close=")" item="item">
+                id=#{item}
+            </foreach>
+        </where>
+    </select>
+    
+    <sql id="repeat">
+        <if test="id != null">
+            id=#{id}
+        </if>
+        <if test="title != null">
+            and title=#{title}
+        </if>
+        <if test="author != null">
+            and author=#{author}
+        </if>
+        <if test="views != null">
+            and views = #{views}
+        </if>
+    </sql>
+
+</mapper>
