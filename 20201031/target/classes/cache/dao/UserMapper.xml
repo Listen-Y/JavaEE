@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cache.dao.UserDao">
+
+    <cache/>
+
+    <select id="selectUserById" parameterType="_int" resultType="user">
+        select * from user where id=#{id};
+    </select>
+
+    <insert id="insert" parameterType="user">
+        insert into user values(#{id}, #{name}, #{pwd});
+    </insert>
+
+    <update id="update" parameterType="_int">
+        update user set id=#{id} where id=#{id};
+    </update>
+</mapper>
