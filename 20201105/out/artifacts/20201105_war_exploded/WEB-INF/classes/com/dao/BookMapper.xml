@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BookMapper">
+    <insert id="insert" parameterType="books">
+        insert into books(bookName, bookCounts, detail)
+        values (#{bookName}, #{bookCounts}, #{detail});
+    </insert>
+
+    <delete id="delete" parameterType="_int">
+        delete from books where bookID=#{bookID};
+    </delete>
+
+    <update id="update" parameterType="books">
+        update books
+        <set>
+            <if test="bookName != null">
+                bookName = #{bookName},
+            </if>
+            <if test="bookCounts != null">
+                bookCounts = #{bookCounts},
+            </if>
+            <if test="detail != null">
+                detail = #{detail}
+            </if>
+        </set>
+        where bookID=#{bookID}
+    </update>
+
+    <select id="query" parameterType="_int" resultType="books">
+        select * from books where bookID = #{id};
+    </select>
+
+    <select id="selectBooks" resultType="books">
+        select * from books;
+    </select>
+
+    <select id="selectBooksByLike" resultType="books" parameterType="java.lang.String">
+        select * from books where bookName like #{keyWords};
+    </select>
+
+</mapper>
