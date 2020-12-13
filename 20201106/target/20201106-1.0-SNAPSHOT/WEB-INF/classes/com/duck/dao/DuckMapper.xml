@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duck.dao.DuckMapper">
+    <select id="select" resultType="duck">
+        select * from duck;
+    </select>
+    <insert id="insert" parameterType="duck">
+        insert into duck
+        values (#{id}, #{name}, #{birthday}, #{height}, #{weight}, #{food})
+    </insert>
+
+    <update id="update" parameterType="duck">
+        update duck
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="height != null">
+                height=#{height},
+            </if>
+            <if test="weight != null">
+                weight=#{weight},
+            </if>
+            <if test="food != null">
+                food=#{food}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        delete from duck where id=#{id};
+    </delete>
+
+    <select id="selectByLike" parameterType="string" resultType="duck">
+        select * from duck where name like #{keyWords}
+    </select>
+
+    <select id="selectByRange" parameterType="map" resultType="duck">
+        select * from duck
+        <where>
+           <if test="minHeight != null">
+               height &gt; #{minHeight}
+           </if>
+           <if test="maxHeight != null">
+               and height &lt; #{maxHeight}
+           </if>
+            <if test="minWeight != null">
+               and weight &gt; #{minWeight}
+            </if>
+            <if test="maxWeight != null">
+                and weight &lt; #{maxWeight}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOne" resultType="duck" parameterType="string">
+        select * from duck where id=#{id};
+    </select>
+</mapper>
