@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--配置mybatis-->
+    <!--导入数据配置-->
+    <context:property-placeholder location="classpath:database.properties"/>
+    <!--配置DataSource-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--sqlSession配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/duck/dao/*.xml"/>
+        <property name="typeAliasesPackage" value="com.duck.pojo"/>
+   <!--     <property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+    </bean>
+    <!--配置自动扫描生成对应接口的mapper并且注入到spring中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--配置扫描mapper借口-->
+        <property name="basePackage" value="com.duck.dao"/>
+    </bean>
+
+    <!--配置service-->
+    <context:component-scan base-package="com.duck.service"/>
+    <!--将serviceImpl注入到spring中-->
+    <bean id="duckService" class="com.duck.service.DuckServiceImpl">
+        <property name="duckMapper" ref="duckMapper"/>
+    </bean>
+    <!--配置事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--结合AOP的思想为被代理类实现事务的支持-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--配置具体切入点需要事务通知 * 表示所用方法-->
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置事务的切入, 也就是配置通知和切入点的连接-->
+    <aop:config >
+        <aop:pointcut id="pointcut" expression="execution(* com.duck.service.DuckServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
+
+
+    <!--SpringMVC配置-->
+    <!--开启mvc注解支持-->
+    <mvc:annotation-driven/>
+    <!--静态资源过滤-->
+    <mvc:default-servlet-handler/>
+    <!--扫描包-->
+    <context:component-scan base-package="com.duck.controller"/>
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+</beans>
