@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+student:
+  name: ${random.uuid} # 随机生成id
+  age: ${random.int(100)} # 随机生成不大于100的数
+  birthday: 1999/01/01
+  books:
+    - math
+    - chinese
+    - english
+  maps: {k1: v1, k2: v2, k3: v3}
+  healthy: true
+  dog:
+    name: ${student.hello:旺财}_大黄  # {:}第一个参数有则选择第一个参数与最后匹配, 没有选择第二个参数与最后匹配
+    age: 3
