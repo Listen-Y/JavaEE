@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>test页面</p>
+<div th:text="${msg}" ></div>
+
+<!--使用text转义特殊字符-->
+<div th:text="${p}"></div>
+<div th:utext="${p}"></div>
+<div th:each="num:${list}" th:text="${num}" ></div>
+<p>===================</p>
+<div th:each="num:${list}">[[${num}]]</div>
+</body>
+</html>
