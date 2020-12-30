@@ -7,16 +7,25 @@ import Model.User;
  * User: Listen-Y.
  * Date: 2020-07-28
  * Time: 16:19
- */
-public class TestUserDao {
+ */public class TestUserDao {
 
-    public static void main(String[] args) {
-        /*User user = new User();
+    @Test
+    public void add() {
+        User user = new User();
         user.setId(1);
         user.setName("listen");
         user.setPassword("listen");
-        //UserDao.addUser(user);
+        UserDao.addUser(user);
         System.out.println(UserDao.selectUser(user.getName()));*/
+    }
+
+    @Test
+    public void delete() {
+        User user = new User();
+        user.setId(1);
+        user.setName("listen");
+        user.setPassword("listen");
         UserDao.deleteUser(5);
     }
 }
+
