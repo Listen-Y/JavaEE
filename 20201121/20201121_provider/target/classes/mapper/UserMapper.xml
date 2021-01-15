@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcloud.dao.UserDao">
+
+    <select id="selectAll" resultType="user">
+        select * from user;
+    </select>
+
+    <select id="query" parameterType="_int" resultType="user">
+        select * from user where id=#{id};
+    </select>
+
+    <insert id="add" parameterType="user">
+        insert into user(name, pwd) values (#{name}, #{pwd});
+    </insert>
+
+    <delete id="delete" parameterType="_int">
+        delete from user where id=#{id};
+    </delete>
+
+</mapper>
