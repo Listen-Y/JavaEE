@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ¸ù±êÇ© -->
+<!-- æ ¹æ ‡ç­¾ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- ´´½¨ÏîÄ¿Ê±ºòµÄÅäÖÃÎÄ¼þ-->
+  <!-- åˆ›å»ºé¡¹ç›®æ—¶å€™çš„é…ç½®æ–‡ä»¶-->
   <groupId>org.example</groupId>
   <artifactId>20200711</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <!-- ¹¹½¨´ò°üwar°ü Ã»ÓÐµÄ»°Ä¬ÈÏÊÇjar°ü -->
+  <!-- æž„å»ºæ‰“åŒ…waråŒ… æ²¡æœ‰çš„è¯é»˜è®¤æ˜¯jaråŒ… -->
 
   <name>20200711 Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
@@ -21,14 +21,14 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
-  <!-- ÒÀÀµ¹ØÏµ ´ÓÖÐÑë²Ö¿âÏÂÔØµÚÈý·½µÄjar°üµ½±¾µØ-->
+  <!-- ä¾èµ–å…³ç³» ä»Žä¸­å¤®ä»“åº“ä¸‹è½½ç¬¬ä¸‰æ–¹çš„jaråŒ…åˆ°æœ¬åœ°-->
   <dependencies>
 
-    <!--ÀïÃæÓÐºÜ¶àµÚÈý·½jar°ü Ò»¸ödependency±êÇ©ÀïÃæÊÇÒ»¸öjar°ü -->
+    <!--é‡Œé¢æœ‰å¾ˆå¤šç¬¬ä¸‰æ–¹jaråŒ… ä¸€ä¸ªdependencyæ ‡ç­¾é‡Œé¢æ˜¯ä¸€ä¸ªjaråŒ… -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
 
@@ -44,9 +44,9 @@
   </dependencies>
 
   <build>
-    <!-- ×îÖÕ´ò³öÀ´µÄ°üµÄÃû×Ö-->
+    <!-- æœ€ç»ˆæ‰“å‡ºæ¥çš„åŒ…çš„åå­—-->
     <finalName>20200711</finalName>
-    <!--ÏÂÃæ¶¼ÊÇÐ©mavenµÄ²å¼þ -->
+    <!--ä¸‹é¢éƒ½æ˜¯äº›mavençš„æ’ä»¶ -->
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
